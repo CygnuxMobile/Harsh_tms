@@ -13,6 +13,7 @@ class AppRoutes {
   static const String unloadingScreen = '/unloadingScreen';
   static const String attendanceScreen = '/attendanceScreen';
   static const String treckingScreen = '/treckingScreen';
+  static const String loadingScreen = '/loadingScreen';
   static const String stockUpdateScreen = '/stockUpdateScreen';
   static const String stockUpdateListScreen = '/stockUpdateListScreen';
   static const String drsListScreen = '/drsListScreen';

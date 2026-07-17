@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:harsh/moduls/control_tower_page/control_tower_binding.dart';
 import 'package:harsh/moduls/control_tower_page/control_tower_screen.dart';
+import 'package:harsh/moduls/loading_page/loading_screen.dart';
 import 'app_routes.dart';
 import 'harsh_moduls/manifest_page/manifest_bindings.dart';
 import 'harsh_moduls/manifest_page/manifest_screen.dart';
@@ -21,6 +22,7 @@ import 'moduls/fuel_trip_sheet_page/fuel_trip_sheet.dart';
 import 'moduls/fuel_trip_sheet_page/fuel_trip_sheet_binding.dart';
 import 'moduls/home_page/dash_board_binding.dart';
 import 'moduls/home_page/dash_board_screen.dart';
+import 'moduls/loading_page/loading_bindings.dart';
 import 'moduls/login_page/login_screen.dart';
 import 'moduls/login_page/login_screen_binding.dart';
 import 'moduls/manifest_page/manifest_bindings.dart';
@@ -57,6 +59,7 @@ List<GetPage> getPages = [
   GetPage(name: AppRoutes.unloadingScreen, page: () => UnloadingScreen(), binding: UnloadingScreenBinding()),
   // GetPage(name: AppRoutes.attendanceScreen, page: () => const AttendanceScreen(), binding: AttendanceBinding()),
   GetPage(name: AppRoutes.treckingScreen, page: () => const TrackingScreen(), binding: TrackingBinding()),
+  GetPage(name: AppRoutes.loadingScreen, page: () =>  LoadingScreen(), binding: LoadingBinding()),
   GetPage(name: AppRoutes.stockUpdateScreen, page: () => const StockUpdate(), binding: StockUpdateBinding()),
   GetPage(name: AppRoutes.stockUpdateListScreen, page: () => StockUpdateListScreen()),
   GetPage(name: AppRoutes.drsListScreen, page: () => const DRSListScreen(), binding: DRSBinding()),
