@@ -223,6 +223,15 @@ class _DashBordScreenState extends State<DashBordScreen> {
                                 Get.toNamed(AppRoutes.controlTowerScreen);
                               },
                             ),
+
+                                 DashBoardContainer(
+                              text: 'Loading',
+                              image: 'assets/images/dashboardimages/imgpsh_fullsize_anim.png',
+                              ontap: () {
+                                Get.toNamed(AppRoutes.loadingScreen);
+                              },
+                            ),
+
                           ],
                         ),
                       ),
