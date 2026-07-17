@@ -41,6 +41,10 @@ class ControlTowerController extends GetxController {
     super.onInit();
     _loadResources();
     getControlTowerData();
+
+    debounce(searchText, (_) {
+      updateMarkersByZoom(force: true);
+    }, time: const Duration(milliseconds: 500));
   }
 
   void toggleMapType() {
@@ -113,12 +117,43 @@ class ControlTowerController extends GetxController {
     }
   }
 
+  List<ControlTower> get searchBaseList {
+    if (searchText.value.isEmpty) return vehicleList;
+    return vehicleList
+        .where((e) => e.vehno.toLowerCase().contains(searchText.value.toLowerCase()))
+        .toList();
+  }
+
   List<ControlTower> get searchedVehicles {
-    final list = filteredVehicles;
+    // If search text is empty, we only show vehicles with GPS in the list/map
+    // If search text is NOT empty, we show all matching vehicles (even without GPS)
+    final list = searchText.value.isEmpty
+        ? filteredVehicles
+        : searchBaseList;
 
     if (searchText.value.isEmpty) return list;
 
-    return list.where((e) => e.vehno.toLowerCase().contains(searchText.value.toLowerCase())).toList();
+    switch (selectedFilter.value) {
+      case VehicleFilter.moving:
+        return list.where((e) => e.isMoving).toList();
+
+      case VehicleFilter.idle:
+        return list.where((e) => !e.isMoving && (double.tryParse(e.speed) ?? 0) > 0).toList();
+
+      case VehicleFilter.stopped:
+        return list.where((e) => !e.isMoving && (double.tryParse(e.speed) ?? 0) == 0).toList();
+
+      default:
+        return list;
+    }
+  }
+
+  List<ControlTower> get mapVehicles {
+    return searchedVehicles.where((e) {
+      final lat = double.tryParse(e.latitude);
+      final lng = double.tryParse(e.longitude);
+      return lat != null && lng != null;
+    }).toList();
   }
 
   /// ================= ZOOM =================
@@ -195,7 +230,7 @@ class ControlTowerController extends GetxController {
   Future<void> _gridMarkers(double precision) async {
     final Map<String, List<ControlTower>> grid = {};
 
-    for (final v in filteredVehicles) {
+    for (final v in mapVehicles) {
       final lat = double.tryParse(v.latitude);
       final lng = double.tryParse(v.longitude);
 
@@ -249,7 +284,7 @@ class ControlTowerController extends GetxController {
     final List<Marker> newMarkers = [];
     final icon = _simpleTruckIconDescriptor!;
 
-    for (final v in filteredVehicles) {
+    for (final v in mapVehicles) {
       final lat = double.tryParse(v.latitude);
       final lng = double.tryParse(v.longitude);
 
