@@ -171,18 +171,18 @@ class ControlTowerScreen extends StatelessWidget {
         child: Obx(
               () => Row(
             children: [
-              _filterChip("All", controller.searchBaseList.length,
+              _filterChip("All", controller.vehicleList.length,
                   Colors.blueGrey, VehicleFilter.all),
 
               _filterChip(
                   "Moving",
-                  controller.searchBaseList.where((v) => v.isMoving).length,
+                  controller.vehicleList.where((v) => v.isMoving).length,
                   Colors.blue,
                   VehicleFilter.moving),
 
               _filterChip(
                   "Idle",
-                  controller.searchBaseList
+                  controller.vehicleList
                       .where((v) =>
                   !v.isMoving &&
                       (double.tryParse(v.speed) ?? 0) > 0)
@@ -192,7 +192,7 @@ class ControlTowerScreen extends StatelessWidget {
 
               _filterChip(
                   "Stopped",
-                  controller.searchBaseList
+                  controller.vehicleList
                       .where((v) =>
                   !v.isMoving &&
                       (double.tryParse(v.speed) ?? 0) == 0)
@@ -334,47 +334,10 @@ class ControlTowerScreen extends StatelessWidget {
 
                   if (v.driverName.isNotEmpty) ...[
                     const SizedBox(height: 4),
-                    Row(
-                      children: [
-                        const Icon(Icons.person, size: 14, color: Colors.black54),
-                        const SizedBox(width: 4),
-                        Expanded(
-                          child: Text(v.driverName,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                  fontSize: 11.5,
-                                  color: Colors.black54)),
-                        ),
-                        if (v.driverMobile.isNotEmpty) ...[
-                          const SizedBox(width: 8),
-                          const Icon(Icons.phone, size: 14, color: Colors.green),
-                          const SizedBox(width: 4),
-                          Text(v.driverMobile,
-                              style: const TextStyle(
-                                  fontSize: 11.5,
-                                  color: Colors.green)),
-                        ],
-                      ],
-                    ),
-                  ],
-
-                  if (v.billingParty.isNotEmpty) ...[
-                    const SizedBox(height: 4),
-                    Row(
-                      children: [
-                        const Icon(Icons.business, size: 14, color: Colors.black54),
-                        const SizedBox(width: 4),
-                        Expanded(
-                          child: Text("Customer: ${v.billingParty}",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                  fontSize: 11.5,
-                                  color: Colors.black54)),
-                        ),
-                      ],
-                    ),
+                    Text("Driver: ${v.driverName}",
+                        style: const TextStyle(
+                            fontSize: 11.5,
+                            color: Colors.black54)),
                   ],
                 ],
               ),

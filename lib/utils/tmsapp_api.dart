@@ -44,4 +44,5 @@ class ApiService {
   static String GetLedgerMasterData = '${baseUrl}V1/Master/GetLedgerMasterData';
   static String TripVehicleDetails = '${baseUrl}V1/Operation/TripVehicleDetails';
   static String TripDriverDetails = '${baseUrl}V1/Operation/TripDriverDetails';
+  static String fleetLoadingSlip = '${baseUrl}V1/Operation/FleetLoadingslip';
 }
