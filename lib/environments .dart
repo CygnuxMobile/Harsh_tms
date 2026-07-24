@@ -22,7 +22,7 @@ abstract class AppEnvironments {
         // baseurl = "http://103.232.124.146:44397/";///test
 
         ///Harsh live.
-        version = 'v 25.06.26';
+        version = 'v 24.07.26';
         dashBordList = [
           'quickDocket',
           // 'gcn',
